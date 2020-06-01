@@ -1,0 +1,71 @@
+<h1 class="mat-display-1">natural-select</h1>
+
+<div fxLayout="column" fxLayoutGap="30px">
+    <div>
+        <button mat-raised-button (click)="validateAllFormControls()">Validate controls with formControl</button>
+        <button mat-raised-button (click)="toggleDisabledAllFormControls()">Disable controls with formControl</button>
+        <button mat-raised-button (click)="setValue()">Set value</button>
+        <button mat-raised-button (click)="clearValue()">Clear value</button>
+    </div>
+
+    <mat-form-field>
+        <mat-label>Prétext</mat-label>
+        <input [(ngModel)]="pretext" matInput />
+        <mat-hint>Basic input field to test alt+tab and focus on next field</mat-hint>
+    </mat-form-field>
+
+    <natural-select-hierarchic [config]="hierarchicConfig" placeholder="Without model"></natural-select-hierarchic>
+
+    <natural-select-hierarchic
+        [config]="hierarchicConfig"
+        [required]="true"
+        placeholder="Required without model"
+    ></natural-select-hierarchic>
+
+    <natural-select-hierarchic
+        [config]="hierarchicConfig"
+        [(ngModel)]="myValue"
+        [required]="true"
+        placeholder="Required with ngModel"
+    ></natural-select-hierarchic>
+
+    <natural-select-hierarchic
+        [config]="hierarchicConfig"
+        [formControl]="formControl"
+        [required]="true"
+        placeholder="Required with formControl"
+    ></natural-select-hierarchic>
+
+    <natural-select-hierarchic
+        [config]="hierarchicConfig"
+        navigateTo="/"
+        placeholder="With navigateTo"
+    ></natural-select-hierarchic>
+
+    <natural-select-hierarchic
+        [config]="hierarchicConfig"
+        icon="pets"
+        placeholder="With custom icon"
+    ></natural-select-hierarchic>
+
+    <natural-select-hierarchic
+        [config]="hierarchicConfig"
+        clearLabel="Unselect"
+        selectLabel="Select something"
+        placeholder="With select and clear label"
+    ></natural-select-hierarchic>
+
+    <div fxLayout="row">
+        <pre class="debug">
+        myValue: {{ myValue | json }}
+        </pre>
+
+        <pre class="debug">
+            formControl.value: {{ formControl.value | json }}
+            formControl.touched: {{ formControl.touched | json }}
+            formControl.dirty: {{ formControl.dirty | json }}
+            formControl.status: {{ formControl.status | json }}
+            formControl.errors: {{ formControl.errors | json }}
+        </pre>
+    </div>
+</div>

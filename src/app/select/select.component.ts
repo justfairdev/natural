@@ -22,6 +22,8 @@ export class SelectComponent {
     ];
     public formControl = new FormControl('', Validators.required);
     public myValue: any = null;
+    public disabled = false;
+    public freeText: any;
 
     constructor(public service: AnyService, public errorService: ErrorService) {}
 
@@ -33,5 +35,18 @@ export class SelectComponent {
 
     public toggleDisabledAllFormControls(): void {
         this.formControl.disabled ? this.formControl.enable() : this.formControl.disable();
+        this.disabled = !this.disabled;
+    }
+
+    public setValue(): void {
+        this.service.getOne('foo').subscribe(item => {
+            this.myValue = item;
+            this.formControl.setValue(item);
+        });
+    }
+
+    public clearValue(): void {
+        this.myValue = null;
+        this.formControl.setValue(null);
     }
 }
